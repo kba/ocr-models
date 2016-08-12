@@ -7,3 +7,6 @@
 [submodule "models/tesseract-3.03"]
 	path = models/tesseract-3.03
 	url = https://github.com/kba/tesseract-3.03-models
+[submodule "models/jze-ocropus"]
+	path = models/jze-ocropus
+	url = https://github.com/kba/jze-ocropus
