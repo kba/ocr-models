@@ -3,14 +3,19 @@ Nedb = require 'nedb'
 Fs = require 'fs'
 RootPath = require 'app-root-path'
 
-console.log filename: "#{RootPath}/models.ndjson"
+Config =
+	modelserver:
+		dbfile: "#{RootPath}/models.ndjson"
+		port: 3002
+
 db = new Nedb(
-	filename: "#{RootPath}/models.ndjson"
+	filename: Config.modelserver.dbfile
 )
 app = new Express()
 app.set('views', "#{RootPath}/views")
 app.set('view engine', 'pug')
 app.get '/zip/*', (req, res) ->
+	console.log req.path
 	rs = Fs.createReadStream RootPath + '/zip/' + req.params[0]
 	rs.pipe res
 app.get '/json', (req, res) ->
@@ -20,5 +25,10 @@ app.get '/json', (req, res) ->
 app.get '/', (req, res) ->
 	db.find {}, (err, docs) ->
 		res.render 'model-list', models: docs
+
+console.log "Loading db from #{Config.modelserver.dbfile}"
 db.loadDatabase ->
-	app.listen 3002
+	console.log "Loaded db"
+	console.log "Starting server"
+	app.listen Config.modelserver.port, (err) ->
+		console.log "Listening on port #{Config.modelserver.port}"
