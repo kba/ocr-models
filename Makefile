@@ -11,7 +11,11 @@ METADATA_SCHEMA = schema/description.schema.json
 MODEL_DESCRIPTIONS = $(shell find . -name 'DESCRIPTION'|sed -e 's,^./,,')
 ZIPPED_MODELS = $(shell find . -name 'DESCRIPTION'|sed -e 's,./models,zip,' -e 's,/DESCRIPTION,.zip,')
 
-.PHONY: models.ndjson
+all: zip models.ndjson
+
+.PHONY: db
+db: models.ndjson
+
 models.ndjson: $(MODEL_DESCRIPTIONS)
 	@$(RM) "$@"
 	@for desc in $(MODEL_DESCRIPTIONS);do \
@@ -38,7 +42,8 @@ zip: $(ZIPPED_MODELS)
 
 $(ZIPPED_MODELS) : zip/%.zip: models/%
 	@$(MKDIR) $(dir $@)
-	@$(ZIP) -j "$@" "$<"
+	@echo ">>> Zipping $<"
+	@$(ZIP) -j "$@" "$<" >/dev/null
 
 .PHONY: schema
 schema: $(METADATA_SCHEMA)
