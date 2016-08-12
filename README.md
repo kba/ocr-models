@@ -1,9 +1,9 @@
 # ocr-models
 A registry of models for OCR engines
 
-## Deployment
+## Setup
 
-Unless you intend to deploy your own version of the model registry,
+Unless you intend to develop your own version of the model registry,
 you won't need to actually clone this repo.
 
 ### Initialize the submodules
@@ -38,8 +38,49 @@ make zip
 make db
 ```
 
-### Start the server
+## Development server
+
+Install node modules:
 
 ```
-npm start
+npm install
 ```
+
+To get a development server up, run `npm start-dev`.
+
+Server will be available on [http://localhost:3002](http://localhost:3002).
+
+## Production server
+
+### Run the docker image
+
+```
+docker run --rm -it -p 3002:3002 kbai/ocr-models
+```
+
+### Proxy through Apache
+
+Enable the `proxy_http` apache module. In Debian:
+
+```
+a2enmod http_proxy
+```
+
+Add a location directive to an enabled site, such as `/etc/apache2/sites-enabled/000-default.conf`:
+
+```apache2
+<Location /ocr-models/>
+    ProxyPass http://localhost:3002/ retry=0
+    ProxyPassReverse http://localhost:3002/
+</Location>
+
+```
+
+Restart apache
+
+```
+service apache2 restart
+# or, if using systemd
+systemctl restart apache2.service
+```
+

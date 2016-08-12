@@ -1,5 +1,6 @@
 SHELL := /bin/bash
 PATH := ./node_modules/.bin:$(PATH)
+DOCKER_IMAGE := kbai/ocr-models
 
 TRAF = traf
 AJV = ajv validate --all-errors
@@ -11,7 +12,7 @@ METADATA_SCHEMA = schema/description.schema.json
 MODEL_DESCRIPTIONS = $(shell find . -name 'DESCRIPTION'|sed -e 's,^./,,')
 ZIPPED_MODELS = $(shell find . -name 'DESCRIPTION'|sed -e 's,./models,zip,' -e 's,/DESCRIPTION,.zip,')
 
-all: zip models.ndjson
+all: zip db
 
 .PHONY: db
 db: models.ndjson
@@ -57,3 +58,6 @@ validate: schema
 	@echo ">>>"
 	@find . -name 'DESCRIPTION' -exec \
 		$(AJV) -s "$(METADATA_SCHEMA)" -d "{}" \;
+
+docker:
+	docker build -t '$(DOCKER_IMAGE)' .
