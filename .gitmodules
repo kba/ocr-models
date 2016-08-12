@@ -1,6 +1,6 @@
-[submodule "kraken"]
+[submodule "modules/kraken"]
 	path = models/kraken
-	url = https://github.com/mittagessen/kraken-models
+	url = https://github.com/kba/kraken-models
 [submodule "models/ocropy"]
 	path = models/ocropy
 	url = https://github.com/kba/ocropy-models
