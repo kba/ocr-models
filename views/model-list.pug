@@ -1,0 +1,18 @@
+h1 List of models
+
+p Total models: #{models.length}
+
+table
+	tr
+		th Author
+		th Name
+		th Size
+		th Modified
+	each model in models
+		tr
+			td
+				a(href="mailto:" + model['author-email']) #{model.author}
+			td 
+				a(href=model.zip) #{model.name}
+			td #{model['zip-size']}
+			td #{model['modified']}

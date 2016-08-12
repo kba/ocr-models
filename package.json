@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "description": "Models for OCR engines",
+  "scripts": {
+      "start": "nodemon -w src -w models.ndjson -w views src/lib/server.coffee"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kba/ocr-models.git"
@@ -15,6 +18,10 @@
   "homepage": "https://github.com/kba/ocr-models#readme",
   "dependencies": {
     "ajv-cli": "^0.9.0",
-    "traf": "0.0.6"
+    "app-root-path": "^1.3.0",
+    "express": "^4.14.0",
+    "glob": "^7.0.5",
+    "nedb": "^1.8.0",
+    "traf": "0.0.8"
   }
 }
