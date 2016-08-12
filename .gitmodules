@@ -1,0 +1,9 @@
+[submodule "kraken"]
+	path = models/kraken
+	url = https://github.com/mittagessen/kraken-models
+[submodule "models/ocropy"]
+	path = models/ocropy
+	url = https://github.com/kba/ocropy-models
+[submodule "models/tesseract-3.03"]
+	path = models/tesseract-3.03
+	url = https://github.com/kba/tessdata
