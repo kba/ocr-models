@@ -4,7 +4,8 @@
   "private": true,
   "description": "Models for OCR engines",
   "scripts": {
-    "start": "nodemon -w src -w models.ndjson -w views src/lib/server.coffee"
+    "start": "coffee src/lib/server.coffee",
+    "start-dev": "nodemon -w src -w models.ndjson -w views src/lib/server.coffee"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,8 @@
     "express": "^4.14.0",
     "glob": "^7.0.5",
     "nedb": "^1.8.0",
-    "pug-cli": "^1.0.0-alpha6",
+    "pug": "2.0.0-beta5",
+    "coffee-script": "1.10.0",
     "traf": "0.0.8"
   },
   "devDependencies": {
