@@ -22,6 +22,10 @@ app.get '/json', (req, res) ->
 	db.find {}, (err, docs) ->
 		res.header 'content-type', 'application/json'
 		res.send JSON.stringify(docs, null, 2)
+app.get '/json/*', (req, res) ->
+	db.findOne {_id: req.params[0]}, (err, desc) ->
+		res.header 'content-type', 'application/json'
+		res.send JSON.stringify(desc, null, 2)
 app.get '/', (req, res) ->
 	db.find {}, (err, docs) ->
 		res.render 'model-list', models: docs
