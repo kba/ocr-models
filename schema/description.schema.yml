@@ -14,6 +14,10 @@ properties:
   name:
     type: 'string'
     title: 'Name of the model, filename for kraken models'
+  supported_engines:
+    type: 'array'
+    minSize: 1
+    items:
   format:
     type: 'string'
     title: 'Format of the model'
